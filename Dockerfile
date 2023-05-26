@@ -62,5 +62,6 @@ RUN mkdir /home/${USER_ACCOUNT}/${ROOT_DIR}
 COPY --chown=${USER_UID}:${USER_GID} --from=build /usr/src/${ROOT_DIR}  /home/${USER_ACCOUNT}/${ROOT_DIR}
 RUN chmod -R 6744 /home/$USER_ACCOUNT
 
-USER $USER_ACCOUNT
+USER ${USER_ACCOUNT}
+
 ENTRYPOINT ["./home/linuxer/app/main"]

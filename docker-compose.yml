@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  app:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: .
+    healthcheck:
+      test: "env | grep HOME"
+      interval: 60s
+      timeout: 30s
+      retries: 3
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M
+        reservations:
+          cpus: "1"
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+        delay: 30s
+        window: 60s
+    ports:
+      - 3000:3000
